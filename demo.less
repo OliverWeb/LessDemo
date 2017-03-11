@@ -1,0 +1,160 @@
+@test_width:300px;
+.box{
+  width:@test_width;
+  height:@test_width;
+  background: @test_width;
+  .border;
+  /* todo 固定混合不需要传入参数值*/
+}
+/* todo 混编其他的选择器可以利用*/
+.border{
+  border: 1px solid pink;
+}
+.box2{
+  .box;
+  margin-left:100px;
+
+}
+
+
+
+/* todo 混合可带参数*/
+.border_2(@border_width){
+  border:@border_width solid pink;
+}
+.test_border_2{
+  .border_2(10px);
+}
+
+
+/* todo 混合默认编程默认*/
+.border_3(@border_width:10px){
+  border: @border_width solid pink;
+}
+.test_border_3{
+  .border_3();
+}
+
+
+/* todo 混合例子*/
+.border_radius(@radius:5px){
+-webkit-border-radius:@radius;
+  -moz-border-radius: @radius;
+  border-radius:@radius;
+}
+.radius_test{
+  width:100px;
+  height: 100px;
+  background: pink;
+  .border_radius();
+}
+/* todo 匹配模式*/
+/*小三角*/
+
+.triangle(top,@w:5px,@c:#ccc){
+  border:@w solid transparent;
+  border-top:@w solid @c;
+}
+.triangle(bottom,@w:5px,@c:#ccc){
+  border:@w solid transparent;
+  border-bottom:@w solid @c;
+}
+.triangle(right,@w:5px,@c:#ccc){
+  border:@w solid transparent;
+  border-right:@w solid @c;
+}
+.triangle(left,@w:5px,@c:#ccc){
+  border:@w solid transparent;
+  border-left:@w solid @c;
+}
+.triangle(@_,@w:5px,@c:#ccc){
+  width: 0;
+  height:0;
+  overflow: hidden;
+}
+.sanjiao{
+  width: 0;
+  height: 0;
+  .triangle(left,10px,red);
+}
+/* todo 匹配模式的定位*/
+.pos(r){
+  position: relative;
+}
+.pos(a){
+  position: absolute;
+}
+.pos(f){
+  position: fixed;
+}
+.div{
+  width: 100px;
+  height: 100px;
+  background: red;
+  .pos(a);
+}
+
+
+/*todo 运算+ —*/
+@w:300px;
+.box{
+  width: @w+300;
+}
+
+/* todo 嵌套*/
+.list{
+  width: 600px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  li{
+    height: 30px;
+    background: pink;
+  }
+  /* todo 不要过度的嵌套*/
+  a{
+    text-align: center;
+  }
+
+}
+/* todo &代表上一层*/
+a{
+  background:pink;
+  &:hover{
+    background: red;
+  }
+}
+
+
+/* todo @argument*/
+.border_01(@w:5px,@s:solid,@c:red){
+  border:@arguments;
+}
+.test_border{
+  .border_01();
+}
+/* todo 避免编译的错误*/
+.nav{
+  width:~'calc(300px-20px)';
+}
+/*todo !important 调试的时候进行选择*/
+.footer{
+  .border_3()!important;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
